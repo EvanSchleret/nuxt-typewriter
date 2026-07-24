@@ -1,16 +1,22 @@
 ## Summary
 
-<!-- Describe the change and its scope. -->
+Describe what this PR changes and why.
+
+## Changes
+
+- 
+
+## Validation
+
+- [ ] I ran `bun run lint`
+- [ ] I ran `bun run typecheck`
+- [ ] I ran `bun run test`
+- [ ] I ran `bun run build`
+- [ ] I added or updated tests when behavior changed
 
 ## Checklist
 
-- [ ] The change is focused and follows existing patterns.
-- [ ] Tests have been added or updated when behavior changes.
-- [ ] Documentation has been updated when needed.
-- [ ] Breaking changes and migration steps are documented.
-- [ ] Lint, typecheck, and tests pass locally.
-
-## Testing
-
-<!-- Describe the commands and scenarios used to verify the change. -->
-
+- [ ] I followed existing code style and architecture patterns
+- [ ] I kept the change scoped and focused
+- [ ] I updated documentation when needed
+- [ ] I reviewed backward compatibility impact
