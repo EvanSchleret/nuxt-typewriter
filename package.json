@@ -1,6 +1,6 @@
 {
   "name": "@evanschleret/nuxt-typewriter",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "A Nuxt module providing an animated Typewriter component.",
   "license": "MIT",
   "type": "module",
