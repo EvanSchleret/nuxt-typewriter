@@ -4,6 +4,43 @@ All notable changes to this project will be documented in this file.
 
 The format is based on Keep a Changelog.
 
+## v1.1.0 - 2026-07-25
+
+### v1.1.0
+
+#### ✨ Highlights
+
+##### ✨ Configurable blinking cursor
+
+The Typewriter cursor can now blink continuously or only after the current text has finished typing.
+
+```vue
+<Typewriter
+  :texts="['Nuxt Typewriter', 'Hello world']"
+  :blink-cursor="{ when: 'end' }"
+/>
+
+```
+##### 🎛️ Fine-grained cursor control
+
+Use the `blinkCursor` object to enable or disable blinking and choose when it should occur.
+
+```vue
+<Typewriter :blink-cursor="{ enabled: false }" />
+<Typewriter :blink-cursor="{ enabled: true, when: 'always' }" />
+<Typewriter :blink-cursor="{ enabled: true, when: 'end' }" />
+
+```
+#### 🚀 Features
+
+- **Typewriter**: Add configurable cursor blinking with `always` and `end` modes, while preserving reduced-motion support (`44c446e`)
+
+#### ❤️ Contributors
+
+- @EvanSchleret
+
+**Full Changelog**: https://github.com/EvanSchleret/nuxt-typewriter/compare/v1.0.0...v1.1.0
+
 ## v1.0.0 - 2026-07-24
 
 ### ✨ Highlights
@@ -19,6 +56,7 @@ The format is based on Keep a Changelog.
   :typing-speed="80"
   :deleting-speed="40"
 />
+
 
 ```
 #### 🎛️ Character and word typing modes
