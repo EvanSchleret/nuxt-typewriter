@@ -4,6 +4,26 @@ All notable changes to this project will be documented in this file.
 
 The format is based on Keep a Changelog.
 
+## v1.1.1 - 2026-07-25
+
+### v1.1.1
+
+#### ✨ Highlights
+
+##### ▶️ Always-on Typewriter animation
+
+The Typewriter no longer stops when the user's system enables reduced-motion preferences. Typing and deleting now always run, ensuring the component remains functional in every configuration.
+
+#### 🚀 Features
+
+- **Typewriter**: Remove `prefers-reduced-motion` handling so typing, deleting, and cursor blinking always animate (`c70b57a`)
+
+#### ❤️ Contributors
+
+- @EvanSchleret
+
+**Full Changelog**: https://github.com/EvanSchleret/nuxt-typewriter/compare/v1.1.0...v1.1.1
+
 ## v1.1.0 - 2026-07-25
 
 ### v1.1.0
@@ -20,6 +40,7 @@ The Typewriter cursor can now blink continuously or only after the current text 
   :blink-cursor="{ when: 'end' }"
 />
 
+
 ```
 ##### 🎛️ Fine-grained cursor control
 
@@ -29,6 +50,7 @@ Use the `blinkCursor` object to enable or disable blinking and choose when it sh
 <Typewriter :blink-cursor="{ enabled: false }" />
 <Typewriter :blink-cursor="{ enabled: true, when: 'always' }" />
 <Typewriter :blink-cursor="{ enabled: true, when: 'end' }" />
+
 
 ```
 #### 🚀 Features
@@ -56,6 +78,7 @@ Use the `blinkCursor` object to enable or disable blinking and choose when it sh
   :typing-speed="80"
   :deleting-speed="40"
 />
+
 
 
 ```
