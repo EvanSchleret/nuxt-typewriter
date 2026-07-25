@@ -19,12 +19,9 @@ const blinkOptions = computed(() => ({
     when: props.blinkCursor?.when ?? 'always'
 }))
 const displayedText = ref(texts.value[0] ?? '')
-const prefersReducedMotion = ref(false)
 const cursorVisible = ref(true)
 let timer: ReturnType<typeof setTimeout> | undefined
 let blinkTimer: ReturnType<typeof setInterval> | undefined
-let mediaQuery: MediaQueryList | undefined
-let reducedMotionListener: ((event: MediaQueryListEvent) => void) | undefined
 let textIndex = 0
 let stepIndex = 0
 let phase: 'typing' | 'pause' | 'deleting' = 'typing'
@@ -60,7 +57,6 @@ function syncBlinking(): void {
     if (
         !blinkOptions.value.enabled
         || texts.value.length === 0
-        || prefersReducedMotion.value
         || (blinkOptions.value.when === 'end' && phase !== 'pause')
     ) {
         return
@@ -129,7 +125,7 @@ function restart(): void {
     displayedText.value = texts.value[0] ?? ''
     syncBlinking()
 
-    if (texts.value.length === 0 || prefersReducedMotion.value) {
+    if (texts.value.length === 0) {
         return
     }
 
@@ -138,16 +134,7 @@ function restart(): void {
 }
 
 onMounted(() => {
-    mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
-    prefersReducedMotion.value = mediaQuery.matches
-    reducedMotionListener = (event) => {
-        prefersReducedMotion.value = event.matches
-        restart()
-        syncBlinking()
-    }
-    mediaQuery.addEventListener('change', reducedMotionListener)
     restart()
-    syncBlinking()
 })
 
 watch(() => [props.texts, props.style], restart, { deep: true })
@@ -156,10 +143,6 @@ watch(() => props.blinkCursor, syncBlinking, { deep: true })
 onBeforeUnmount(() => {
     stop()
     stopBlinking()
-
-    if (mediaQuery !== undefined && reducedMotionListener !== undefined) {
-        mediaQuery.removeEventListener('change', reducedMotionListener)
-    }
 })
 </script>
 
