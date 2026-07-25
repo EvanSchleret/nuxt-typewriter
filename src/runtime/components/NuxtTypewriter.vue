@@ -14,9 +14,15 @@ const props = withDefaults(defineProps<TypewriterProps>(), {
 })
 
 const texts = computed(() => normalizeTypewriterTexts(props.texts))
+const blinkOptions = computed(() => ({
+    enabled: props.blinkCursor?.enabled ?? true,
+    when: props.blinkCursor?.when ?? 'always'
+}))
 const displayedText = ref(texts.value[0] ?? '')
 const prefersReducedMotion = ref(false)
+const cursorVisible = ref(true)
 let timer: ReturnType<typeof setTimeout> | undefined
+let blinkTimer: ReturnType<typeof setInterval> | undefined
 let mediaQuery: MediaQueryList | undefined
 let reducedMotionListener: ((event: MediaQueryListEvent) => void) | undefined
 let textIndex = 0
@@ -39,6 +45,32 @@ function stop(): void {
     clearTimer()
 }
 
+function stopBlinking(): void {
+    if (blinkTimer !== undefined) {
+        clearInterval(blinkTimer)
+        blinkTimer = undefined
+    }
+
+    cursorVisible.value = true
+}
+
+function syncBlinking(): void {
+    stopBlinking()
+
+    if (
+        !blinkOptions.value.enabled
+        || texts.value.length === 0
+        || prefersReducedMotion.value
+        || (blinkOptions.value.when === 'end' && phase !== 'pause')
+    ) {
+        return
+    }
+
+    blinkTimer = setInterval(() => {
+        cursorVisible.value = !cursorVisible.value
+    }, 500)
+}
+
 function run(): void {
     const currentText = texts.value[textIndex]
 
@@ -58,6 +90,7 @@ function run(): void {
         }
 
         phase = 'pause'
+        syncBlinking()
         schedule(run, props.pauseDuration)
         return
     }
@@ -69,6 +102,7 @@ function run(): void {
         }
 
         phase = 'deleting'
+        syncBlinking()
         schedule(run, props.deletingSpeed)
         return
     }
@@ -83,6 +117,7 @@ function run(): void {
     textIndex = (textIndex + 1) % texts.value.length
     stepIndex = 0
     phase = 'typing'
+    syncBlinking()
     schedule(run, props.typingSpeed)
 }
 
@@ -92,6 +127,7 @@ function restart(): void {
     stepIndex = 0
     phase = 'typing'
     displayedText.value = texts.value[0] ?? ''
+    syncBlinking()
 
     if (texts.value.length === 0 || prefersReducedMotion.value) {
         return
@@ -107,15 +143,19 @@ onMounted(() => {
     reducedMotionListener = (event) => {
         prefersReducedMotion.value = event.matches
         restart()
+        syncBlinking()
     }
     mediaQuery.addEventListener('change', reducedMotionListener)
     restart()
+    syncBlinking()
 })
 
 watch(() => [props.texts, props.style], restart, { deep: true })
+watch(() => props.blinkCursor, syncBlinking, { deep: true })
 
 onBeforeUnmount(() => {
     stop()
+    stopBlinking()
 
     if (mediaQuery !== undefined && reducedMotionListener !== undefined) {
         mediaQuery.removeEventListener('change', reducedMotionListener)
@@ -131,6 +171,8 @@ onBeforeUnmount(() => {
         <span>{{ displayedText }}</span>
         <span
             v-if="showCursor"
+            class="typewriter__cursor"
+            :style="{ opacity: cursorVisible ? 1 : 0 }"
             aria-hidden="true"
         >{{ cursor }}</span>
     </span>

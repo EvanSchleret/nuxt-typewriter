@@ -1,61 +1,63 @@
 {
-  "name": "@evanschleret/nuxt-typewriter",
-  "version": "1.0.0",
-  "description": "A Nuxt module providing an animated Typewriter component.",
-  "license": "MIT",
-  "type": "module",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/EvanSchleret/nuxt-typewriter.git"
-  },
-  "main": "./dist/module.cjs",
-  "module": "./dist/module.mjs",
-  "types": "./dist/module.d.ts",
-  "files": ["dist"],
-  "exports": {
-    ".": {
-      "types": "./dist/module.d.ts",
-      "import": "./dist/module.mjs",
-      "require": "./dist/module.cjs"
+    "name": "@evanschleret/nuxt-typewriter",
+    "version": "1.0.0",
+    "description": "A Nuxt module providing an animated Typewriter component.",
+    "license": "MIT",
+    "type": "module",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/EvanSchleret/nuxt-typewriter.git"
     },
-    "./runtime": {
-      "types": "./dist/runtime.d.ts",
-      "import": "./dist/runtime.mjs",
-      "require": "./dist/runtime.cjs"
-    }
-  },
-  "sideEffects": false,
-  "scripts": {
-    "build": "nuxt-module-build build",
-    "dev": "nuxt-module-build build --stub",
-    "playground": "nuxt dev playground",
-    "postinstall": "nuxt prepare",
-    "lint": "eslint .",
-    "typecheck": "vue-tsc --noEmit",
-    "test": "vitest run",
-    "prepublishOnly": "npm run build"
-  },
-  "peerDependencies": {
-    "nuxt": ">=3.0.0"
-  },
-  "devDependencies": {
-    "@eslint/eslintrc": "^3.3.6",
-    "@nuxt/kit": "^4.4.8",
-    "@nuxt/module-builder": "^1.0.2",
-    "@nuxt/eslint": "^1.15.2",
-    "@types/node": "^26.1.1",
-    "eslint": "^10.7.0",
-    "eslint-plugin-tailwindcss": "^4.2.0",
-    "nuxt": "^4.4.6",
-    "tailwindcss": "^4.3.0",
-    "typescript": "^6.0.3",
-    "vue-tsc": "^3.3.2",
-    "vitest": "^4.1.9",
-    "@types/bun": "latest"
-  },
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.org/"
-  },
-  "packageManager": "bun@1.3.14"
+    "main": "./dist/module.cjs",
+    "module": "./dist/module.mjs",
+    "types": "./dist/module.d.ts",
+    "files": [
+        "dist"
+    ],
+    "exports": {
+        ".": {
+            "types": "./dist/module.d.ts",
+            "import": "./dist/module.mjs",
+            "require": "./dist/module.cjs"
+        },
+        "./runtime": {
+            "types": "./dist/runtime.d.ts",
+            "import": "./dist/runtime.mjs",
+            "require": "./dist/runtime.cjs"
+        }
+    },
+    "sideEffects": false,
+    "scripts": {
+        "build": "nuxt-module-build build",
+        "dev": "nuxt-module-build build --stub",
+        "playground": "nuxt dev playground",
+        "postinstall": "nuxt prepare",
+        "lint": "eslint .",
+        "typecheck": "vue-tsc --noEmit",
+        "test": "vitest run",
+        "prepublishOnly": "npm run build"
+    },
+    "peerDependencies": {
+        "nuxt": ">=3.0.0"
+    },
+    "devDependencies": {
+        "@eslint/eslintrc": "^3.3.6",
+        "@nuxt/kit": "^4.4.8",
+        "@nuxt/module-builder": "^1.0.2",
+        "@nuxt/eslint": "^1.15.2",
+        "@types/node": "^26.1.1",
+        "eslint": "^10.7.0",
+        "eslint-plugin-tailwindcss": "^4.2.0",
+        "nuxt": "^4.4.6",
+        "tailwindcss": "^4.3.0",
+        "typescript": "^6.0.3",
+        "vue-tsc": "^3.3.2",
+        "vitest": "^4.1.9",
+        "@types/bun": "latest"
+    },
+    "publishConfig": {
+        "access": "public",
+        "registry": "https://registry.npmjs.org/"
+    },
+    "packageManager": "bun@1.3.14"
 }

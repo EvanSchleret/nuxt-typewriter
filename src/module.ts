@@ -16,11 +16,11 @@ export default defineNuxtModule<ModuleOptions>({
         autoImport: true
     },
     setup(options) {
+        const resolver = createResolver(import.meta.url)
+
         if (!options.autoImport) {
             return
         }
-
-        const resolver = createResolver(import.meta.url)
 
         addComponent({
             name: 'Typewriter',

@@ -26,6 +26,7 @@ export default defineNuxtConfig({
     :typing-speed="80"
     :deleting-speed="40"
     :pause-duration="1500"
+    :blink-cursor="{ when: 'end' }"
   />
 </template>
 ```
@@ -45,6 +46,7 @@ Set `style` to `characters` to reveal text one character at a time, or to
 | `loop` | `boolean` | `true` | Whether to continue cycling through texts |
 | `cursor` | `string` | `\|` | Cursor content |
 | `showCursor` | `boolean` | `true` | Whether to display the cursor |
+| `blinkCursor` | `{ enabled?: boolean, when?: 'always' \| 'end' }` | `{ enabled: true, when: 'always' }` | Controls cursor blinking |
 
 ## Status
 

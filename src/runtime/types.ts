@@ -1,4 +1,10 @@
 export type TypewriterStyle = 'characters' | 'words'
+export type TypewriterBlinkWhen = 'always' | 'end'
+
+export interface TypewriterBlinkOptions {
+    enabled?: boolean
+    when?: TypewriterBlinkWhen
+}
 
 export interface TypewriterProps {
     texts: string | string[]
@@ -9,4 +15,5 @@ export interface TypewriterProps {
     loop?: boolean
     cursor?: string
     showCursor?: boolean
+    blinkCursor?: TypewriterBlinkOptions
 }
